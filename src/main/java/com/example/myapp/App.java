@@ -17,7 +17,7 @@ public class App extends Application {
         stage = primaryStage;
         scene = new Scene(loadFXML("MainFrm"), 600, 419);
 
-
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
@@ -29,7 +29,17 @@ public class App extends Application {
         stage.setWidth(root.prefWidth(-1));
         stage.setHeight(root.prefHeight(-1));
     }
+    public static void setRootPop(String fxml, String title, boolean resizable) throws IOException { // hien thi hop thoai dialog
+        Stage stage = new Stage();
+        Scene newScene = new Scene(loadFXML(fxml));
+        stage.setResizable(resizable);
+        stage.setScene(newScene);
+        stage.setTitle(title);
 
+        Stage parentStage = (Stage) scene.getWindow();
+
+        stage.showAndWait();
+    }
 
 
     private static Parent loadFXML(String fxml) throws IOException {

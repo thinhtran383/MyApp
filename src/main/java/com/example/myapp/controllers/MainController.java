@@ -1,5 +1,6 @@
 package com.example.myapp.controllers;
 
+import com.example.myapp.App;
 import com.example.myapp.models.Word;
 import com.example.myapp.services.IWordService;
 import com.example.myapp.services.WordServiceImpl;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -28,10 +30,10 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<String, Word> colVietnamese;
     @FXML
-    private TextField txtSearch;
-    @FXML
-    private TextField txtEnglish;
-    @FXML
+        private TextField txtSearch;
+        @FXML
+        private TextField txtEnglish;
+        @FXML
     private TextField txtVietnamese;
 
     private final IWordService wordService;
@@ -52,7 +54,7 @@ public class MainController implements Initializable {
         tbWords.setItems(wordService.getAllWords());
     }
 
-    private boolean isNull(Object ...o){
+    private boolean isNull(Object ...o){ // spread operator
         for(Object object: o){
             if(object == null || object.toString().isEmpty()){
                 return true;
@@ -82,7 +84,7 @@ public class MainController implements Initializable {
         String english = txtEnglish.getText();
 
         if(isNull(vietnamese, english)){
-            AlertUtil.showAlert(Alert.AlertType.ERROR,"Error", null,"Please fill all the textfield!");
+            AlertUtil.showAlert(Alert.AlertType.ERROR,"Error", null,"Please fill all the te xtfield!");
             return;
         }
 
@@ -120,11 +122,16 @@ public class MainController implements Initializable {
     public void onTyping(KeyEvent keyEvent) {
         String keyword = txtSearch.getText();
 
+
+
         ObservableList<Word> words = wordService.getAllWords();
         if(keyword.isEmpty()){
             tbWords.setItems(wordService.getAllWords());
             return;
         }
+
+
+
         ObservableList<Word> filteredWords = words.filtered(word -> word.getEnglish().contains(keyword));
         tbWords.setItems(filteredWords);
 
@@ -133,5 +140,9 @@ public class MainController implements Initializable {
     public void onClickImport(ActionEvent actionEvent) {
         wordService.importData();
         tbWords.setItems(wordService.getAllWords());
+    }
+
+    public void onClickGame(ActionEvent actionEvent) throws IOException {
+        App.setRootPop("GameFrm", "Game", false);
     }
 }

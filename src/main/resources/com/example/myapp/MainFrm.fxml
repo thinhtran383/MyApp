@@ -73,5 +73,6 @@
             <Button mnemonicParsing="false" onAction="#onClickImport" text="Import" GridPane.columnIndex="5" />
          </children>
       </GridPane>
+      <Button layoutX="449.0" layoutY="270.0" mnemonicParsing="false" onAction="#onClickGame" text="Game" />
    </children>
 </AnchorPane>

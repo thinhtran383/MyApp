@@ -17,7 +17,7 @@ public class WordRepoImpl implements IWordRepo {
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) { // doc tung  dong cho den khi het
                 String[] parts = line.split("\t");
                 if (parts.length >= 2) {
                     String english = parts[0].trim();
@@ -34,11 +34,10 @@ public class WordRepoImpl implements IWordRepo {
     }
 
     @Override
-    public void save(Word word) {
+    public void save(Word word) { // luu hoac cap nhat (kiem tra neu ton tai thi la cap nhat <> them moi)
         List<Word> existingWords = new ArrayList<>();
         boolean wordExists = false;
 
-        // Check if the word already exists
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -162,9 +161,4 @@ public class WordRepoImpl implements IWordRepo {
         }
     }
 
-
-    public static void main(String[] args) {
-        WordRepoImpl wordRepo = new WordRepoImpl();
-        wordRepo.importData("C:\\Users\\ThinhTran\\Documents\\neww.txt");
-    }
 }

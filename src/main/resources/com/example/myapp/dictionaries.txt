@@ -1,6 +1,5 @@
 abase	làm mất thể diện
 abbess	nữ tu viện trưởng
-abbot	tu viện trưởng
 abdicate	từ chức
 abdomen	bụng 1
 abbey	tu viện 2
